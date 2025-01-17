@@ -1,8 +1,5 @@
 package com.openclassrooms.mddapi.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.openclassrooms.mddapi.dto.response.TopicDTO;
 import com.openclassrooms.mddapi.dto.response.UserDTO;
 import com.openclassrooms.mddapi.model.User;
-import com.openclassrooms.mddapi.service.TopicService;
 import com.openclassrooms.mddapi.service.UserService;
 
 @RestController
@@ -28,9 +23,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private TopicService topicService;
 
     @Autowired
     private JwtDecoder jwtDecoder;
@@ -73,18 +65,7 @@ public class UserController {
         User user = userService.getUserWithEmailOrUsername(emailOrUsername)
             .orElse(null);
 
-        List<TopicDTO> topics = user.getSubscriptions().stream()
-            .map(topicService::convertToDTO)
-            .collect(Collectors.toList());
-
-        UserDTO userDTO = new UserDTO(
-            user.getId(),
-            user.getUsername(),
-            user.getEmail(),
-            topics,
-            user.getCreatedAt(),
-            user.getUpdatedAt()
-        );
+        UserDTO userDTO = userService.convertToDTO(user);
 
         return ResponseEntity.ok(userDTO);
     }

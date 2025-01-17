@@ -9,11 +9,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.mddapi.dto.request.RegisterRequest;
+import com.openclassrooms.mddapi.dto.response.TopicDTO;
 import com.openclassrooms.mddapi.dto.response.UserDTO;
 import com.openclassrooms.mddapi.exception.AlreadyExistsException;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
-import com.openclassrooms.mddapi.repository.TopicRepository;
 import com.openclassrooms.mddapi.repository.UserRepository;
 
 @Service
@@ -23,7 +23,7 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private TopicRepository topicRepository;
+    private TopicService topicService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -67,7 +67,7 @@ public class UserService {
     public void subscribe(Long id, Long topicId) {
         User user = userRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
-        Topic topic = topicRepository.findById(topicId)
+        Topic topic = topicService.getTopicEntity(topicId)
             .orElseThrow(() -> new RuntimeException("Topic not found with id: " + topicId));
 
         boolean alreadySubscribed = user.getSubscriptions().stream().anyMatch(o -> o.getId().equals(topicId));
@@ -92,16 +92,16 @@ public class UserService {
         userRepository.save(user);
     }
 
-    private UserDTO convertToDTO(User user) {
-        List<Long> topicIds = user.getSubscriptions().stream()
-            .map(Topic::getId)
+    public UserDTO convertToDTO(User user) {
+        List<TopicDTO> topics = user.getSubscriptions().stream()
+            .map(topicService::convertToDTO)
             .collect(Collectors.toList());
 
         return new UserDTO(
             user.getId(),
             user.getUsername(),
             user.getEmail(),
-            topicIds,
+            topics,
             user.getCreatedAt(),
             user.getUpdatedAt()
         );
