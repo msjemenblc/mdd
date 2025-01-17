@@ -12,12 +12,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO {
+public class PostDTO {
 
     private Long id;
-    private String username;
-    private String email;
-    private List<TopicDTO> subscriptions;
+    private String title;
+    private String description;
+
+    private TopicDTO topic;
+
+    private AuthorDTO author;
+
+    private List<CommentDTO> comments;
 
     @JsonProperty("created_at")
     private LocalDateTime createdAt;

@@ -9,16 +9,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -26,37 +22,30 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(
-    name = "users", 
-    uniqueConstraints = { 
-        @UniqueConstraint(columnNames = "email"),
-        @UniqueConstraint(columnNames = "username")
-    }
+    name = "posts"
 )
-public class User {
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @Size(min = 5, max = 40)
-    private String username;
+    private String title;
 
     @NotNull
-    @Email
-    @Size(min = 5, max = 50)
-    private String email;
+    private String description;
 
-    @NotNull
-    private String password;
+    @ManyToOne
+    @JoinColumn(name = "topic_id")
+    private Topic topic;
 
-    @ManyToMany
-    @JoinTable(
-        name = "subscribe",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "topic_id")
-    )
-    private List<Topic> subscriptions;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private User author;
+
+    @OneToMany(mappedBy = "post")
+    private List<Comment> comments;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
