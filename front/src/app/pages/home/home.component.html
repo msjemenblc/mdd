@@ -1,5 +1,23 @@
-<div class="center">
-    <img src="/assets/logo_p6.png" alt="logo" />
-    <h1>Welcome to MDD</h1>
-    <button mat-raised-button color="primary" (click)="start()">Commencer</button>
+<div class="h-screen flex justify-center items-center flex-col gap-16">
+    <img 
+        src="/assets/logo_p6.png" 
+        alt="logo"
+        class="w-3/4 md:w-[400px]"
+    />
+    <div class="flex flex-col md:flex-row gap-4 md:gap-10">
+        <button 
+            mat-raised-button
+            class="home-button text-lg"
+            [routerLink]="'/login'"
+        >
+            Se connecter
+        </button>
+        <button 
+            mat-raised-button
+            class="home-button text-lg"
+            [routerLink]="'/register'"
+        >
+            S'inscrire
+        </button>
+    </div>
 </div>

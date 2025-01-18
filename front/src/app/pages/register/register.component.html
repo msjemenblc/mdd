@@ -1,0 +1,15 @@
+<app-back-button></app-back-button>
+<div class="flex justify-center">
+    <img
+        src="/assets/logo_p6.png" 
+        alt="logo"
+        class="w-3/4 md:hidden"
+    />
+</div>
+<app-form
+    [title]="'Inscription'"
+    [inputs]="registerInputs"
+    [buttonText]="'S&rsquo;inscrire'"
+    (submitForm)="handleRegister($event)"
+>
+</app-form>

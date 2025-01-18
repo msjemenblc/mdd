@@ -1,0 +1,25 @@
+<div class="flex justify-center items-center flex-col gap-4 md:pt-32">
+    <h1>{{ title }}</h1>
+    <form (ngSubmit)="onSubmit()">
+        <div 
+            *ngFor="let input of inputs"
+            class="flex flex-col"
+        >
+            <label>{{ input.label }}</label>
+            <input
+                [type]="input.type"
+                [name]="input.name"
+                [(ngModel)]="formData[input.name]"
+                class="form-input"
+                required
+            />
+        </div>
+    </form>
+    <button 
+        mat-raised-button 
+        color="primary" 
+        (click)="onSubmit()"
+    >
+        {{ buttonText }}
+    </button>
+</div>
