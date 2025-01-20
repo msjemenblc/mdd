@@ -1,8 +1,8 @@
 <header 
     class="w-screen border-b-2 border-b-black flex-row justify-between items-center px-2 md:px-6"
     [ngClass]="{ 
-        'hidden md:flex': !isAuthenticated,
-        'flex': isAuthenticated
+        'hidden md:flex': !(isAuthenticated$ | async),
+        'flex': isAuthenticated$ | async
     }"
 >
     <img 
@@ -10,7 +10,7 @@
         alt="logo"
         class="w-1/4 md:w-1/12"
     />
-    <div *ngIf="isAuthenticated">
+    <div *ngIf="(isAuthenticated$ | async)">
         <div class="text-xl hidden md:block">
             <button mat-button>Articles</button>
             <button mat-button>Thèmes</button>
@@ -42,7 +42,7 @@
 
 <!-- Sidenav -->
 <mat-sidenav-container 
-    *ngIf="sidenavOpened && isAuthenticated"
+    *ngIf="sidenavOpened && (isAuthenticated$ | async)"
     class="md:left-[-9999px]"
 >
     <mat-sidenav #sidenav mode="side" position="end" [(opened)]="sidenavOpened">

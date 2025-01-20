@@ -7,6 +7,7 @@ import { Event, NavigationEnd, Router } from '@angular/router';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+    title: string = 'mdd';
     isHomePage: boolean = false;
 
     constructor(private router: Router) {

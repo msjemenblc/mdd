@@ -15,6 +15,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { FormComponent } from './components/form/form.component';
 import { BackButtonComponent } from './components/back-button/back-button.component';
+import { HttpClientModule } from '@angular/common/http';
+import { PostComponent } from './pages/post/post.component';
 
 @NgModule({
     declarations: [
@@ -23,13 +25,15 @@ import { BackButtonComponent } from './components/back-button/back-button.compon
         HeaderComponent,
         LoginComponent, 
         RegisterComponent, 
+        PostComponent,
         FormComponent, 
-        BackButtonComponent
+        BackButtonComponent 
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
+        HttpClientModule,
         FormsModule,
         MatButtonModule,
         MatIconModule,

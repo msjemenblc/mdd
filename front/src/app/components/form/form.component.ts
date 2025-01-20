@@ -9,7 +9,7 @@ export class FormComponent {
     @Input() title: string = '';
     @Input() inputs: { label: string; type: string; name: string }[] = [];
     @Input() buttonText: string = 'Valider';
-    @Output() submitForm = new EventEmitter<any>();
+    @Output() submitForm = new EventEmitter<{ [key: string]: string }>();
 
     formData: { [key: string]: string } = {};
 

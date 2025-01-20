@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
     selector: 'app-login',
@@ -11,7 +12,23 @@ export class LoginComponent {
         { label: 'Mot de passe', type: 'password', name: 'password' }
     ];
 
-    handleLogin(data: any) {
-        console.log('Login data:', data);
+    constructor(
+        private authService: AuthService,
+    ) {}
+
+    handleLogin(data: { [key: string]: string }) {
+        const loginData: { identifier: string, password: string } = {
+            identifier: data['identifier'],
+            password: data['password']
+        }
+
+        this.authService.login(loginData).subscribe({
+            next: (response) => {
+                console.log('Login réussi:', response);
+            },
+            error: (error) => {
+                console.error('Erreur lors de la connexion:', error);
+            }
+        });
     }
 }

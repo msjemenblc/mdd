@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -58,6 +59,7 @@ public class UserService {
         user.setUsername(registerRequest.getUsername());
         user.setEmail(registerRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+        user.setSubscriptions(new ArrayList<Topic>());
 
         User savedUser = userRepository.save(user);
 
