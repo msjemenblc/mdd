@@ -10,8 +10,8 @@ export class PostComponent implements OnInit {
     constructor(private authService: AuthService) { }
 
     ngOnInit(): void {
-        // setTimeout(() => {
-        //     this.authService.logout();
-        // }, 5000);
+        setTimeout(() => {
+            this.authService.logout();
+        }, 5000);
     }
 }

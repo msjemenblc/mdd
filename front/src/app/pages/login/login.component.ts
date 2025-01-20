@@ -12,9 +12,9 @@ export class LoginComponent {
         { label: 'Mot de passe', type: 'password', name: 'password' }
     ];
 
-    constructor(
-        private authService: AuthService,
-    ) {}
+    errorMessage: string | null = null;
+
+    constructor(private authService: AuthService) {}
 
     handleLogin(data: { [key: string]: string }) {
         const loginData: { identifier: string, password: string } = {
@@ -24,10 +24,14 @@ export class LoginComponent {
 
         this.authService.login(loginData).subscribe({
             next: (response) => {
-                console.log('Login réussi:', response);
+                this.errorMessage = null;
             },
             error: (error) => {
-                console.error('Erreur lors de la connexion:', error);
+                if (error.status === 401) {
+                    this.errorMessage = "Identifiant ou mot de passe incorrect !";
+                } else {
+                    this.errorMessage = 'Une erreur inattendue s’est produite. Veuillez réessayer.';
+                }
             }
         });
     }

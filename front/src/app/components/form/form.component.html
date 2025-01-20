@@ -1,6 +1,9 @@
 <div class="flex justify-center items-center flex-col gap-4 md:pt-32">
     <h1>{{ title }}</h1>
-    <form>
+    <div *ngIf="errorMessage" class="text-red-500">
+        {{ errorMessage }}
+    </div>
+    <form #registerForm="ngForm">
         <div 
             *ngFor="let input of inputs"
             class="flex flex-col"
@@ -17,7 +20,8 @@
     </form>
     <button 
         mat-raised-button 
-        color="primary" 
+        color="primary"
+        [disabled]="registerForm.invalid"
         (click)="onSubmit()"
     >
         {{ buttonText }}

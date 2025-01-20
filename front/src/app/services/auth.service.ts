@@ -23,18 +23,17 @@ export class AuthService {
     login(credentials: { identifier: string; password: string }): Observable<any> {
         return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials).pipe(
             tap(response => {
-                const token = response.token;
-                if (token) {
-                    this.setToken(token);
-                    this.authStatus.next(true);
-                    this.router.navigate(['/post']);
-                }
+                this.authenticateUser(response);
             })
-        )
+        );
     }
 
-    register(userData: { name: string; email: string; password: string }): Observable<any> {
-        return this.http.post(`${this.apiUrl}/register`, userData);
+    register(userData: { username: string; email: string; password: string }): Observable<any> {
+        return this.http.post<AuthResponse>(`${this.apiUrl}/register`, userData).pipe(
+            tap(response => {
+                this.authenticateUser(response);
+            })
+        );
     }
 
     logout(): void {
@@ -57,5 +56,14 @@ export class AuthService {
 
     isAuthenticated(): Observable<boolean> {
         return this.authStatus.asObservable();
+    }
+
+    private authenticateUser(response: AuthResponse): void {
+        const token = response.token;
+        if (token) {
+            this.setToken(token);
+            this.authStatus.next(true);
+            this.router.navigate(['/post']);
+        }
     }
 }
