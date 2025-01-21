@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
     selector: 'app-register',
@@ -61,10 +61,14 @@ export class RegisterComponent {
         this.authService.register(this.registerForm.value).subscribe({
             next: (response) => {
                 this.errorMessage = null;
-                console.log('Register réussi', response);
             },
             error: (error) => {
-                this.errorMessage = 'Une erreur inattendue s’est produite. Veuillez réessayer.';
+                console.log(error);
+                if (error.status === 401) {
+                    this.errorMessage = "Utilisez un nom d'utilisateur ou un email différent !";
+                } else {
+                    this.errorMessage = 'Une erreur inattendue s’est produite. Veuillez réessayer.';
+                }
             }
         });
     }

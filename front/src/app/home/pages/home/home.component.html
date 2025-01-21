@@ -1,4 +1,4 @@
-<div class="h-screen flex justify-center items-center flex-col gap-16">
+<div class="flex justify-center items-center flex-col gap-16 md:pt-32">
     <img 
         src="/assets/logo_p6.png" 
         alt="logo"
@@ -8,14 +8,14 @@
         <button 
             mat-raised-button
             class="home-button text-lg"
-            [routerLink]="'/login'"
+            [routerLink]="'/auth/login'"
         >
             Se connecter
         </button>
         <button 
             mat-raised-button
             class="home-button text-lg"
-            [routerLink]="'/register'"
+            [routerLink]="'/auth/register'"
         >
             S'inscrire
         </button>

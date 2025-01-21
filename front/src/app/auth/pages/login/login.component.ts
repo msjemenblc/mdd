@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
     selector: 'app-login',
@@ -50,7 +50,6 @@ export class LoginComponent {
         this.authService.login(this.loginForm.value).subscribe({
             next: (response) => {
                 this.errorMessage = null;
-                console.log('Login réussi', response);
             },
             error: (error) => {
                 if (error.status === 401) {
