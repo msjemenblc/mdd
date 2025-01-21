@@ -12,3 +12,9 @@ mat-sidenav-container {
 mat-sidenav {
     width: 45%;
 }
+
+mat-nav-list button {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+}

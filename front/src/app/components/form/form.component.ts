@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-form',
@@ -10,11 +11,14 @@ export class FormComponent {
     @Input() inputs: { label: string; type: string; name: string }[] = [];
     @Input() buttonText: string = 'Valider';
     @Input() errorMessage: string | null = null;
-    @Output() submitForm = new EventEmitter<{ [key: string]: string }>();
+    @Input() formGroup!: FormGroup;
+    @Output() submitForm = new EventEmitter<void>();
 
     formData: { [key: string]: string } = {};
 
     onSubmit() {
-        this.submitForm.emit(this.formData);
+        if (this.formGroup.valid) {
+            this.submitForm.emit();
+        }
     }
 }

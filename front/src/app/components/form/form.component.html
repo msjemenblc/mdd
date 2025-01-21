@@ -3,25 +3,34 @@
     <div *ngIf="errorMessage" class="text-red-500">
         {{ errorMessage }}
     </div>
-    <form #registerForm="ngForm">
-        <div 
+    <form [formGroup]="formGroup">
+        <div
             *ngFor="let input of inputs"
             class="flex flex-col"
         >
             <label>{{ input.label }}</label>
+            <div *ngIf="formGroup.get(input.name)?.invalid && formGroup.get(input.name)?.touched" class="text-red-500">
+                <span *ngIf="formGroup.get(input.name)?.errors?.['required']">Ce champ est requis.</span>
+                <span *ngIf="formGroup.get(input.name)?.errors?.['minlength']">
+                    Minimum {{ formGroup.get(input.name)?.errors?.['minlength']?.requiredLength }} caractères.
+                </span>
+                <span *ngIf="formGroup.get(input.name)?.errors?.['maxlength']">
+                    Maximum {{ formGroup.get(input.name)?.errors?.['maxlength']?.requiredLength }} caractères.
+                </span>
+                <span *ngIf="formGroup.get(input.name)?.errors?.['email']">Email invalide.</span>
+                <span *ngIf="formGroup.get(input.name)?.errors?.['pattern']">Une minuscule.<br>Une majusule.<br>Un chiffre.<br>Un caractère spécial.</span>
+            </div>
             <input
                 [type]="input.type"
-                [name]="input.name"
-                [(ngModel)]="formData[input.name]"
+                [formControlName]="input.name"
                 class="form-input"
-                required
             />
         </div>
     </form>
     <button 
         mat-raised-button 
         color="primary"
-        [disabled]="registerForm.invalid"
+        [disabled]="formGroup.invalid"
         (click)="onSubmit()"
     >
         {{ buttonText }}

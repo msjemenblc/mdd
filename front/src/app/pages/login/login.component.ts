@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -7,6 +8,8 @@ import { AuthService } from 'src/app/services/auth.service';
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+    loginForm: FormGroup;
+
     loginInputs = [
         { label: `Email ou nom d'utilisateur`, type: 'text', name: 'identifier' },
         { label: 'Mot de passe', type: 'password', name: 'password' }
@@ -14,17 +17,40 @@ export class LoginComponent {
 
     errorMessage: string | null = null;
 
-    constructor(private authService: AuthService) {}
+    constructor(
+        private fb: FormBuilder,
+        private authService: AuthService
+    ) {
+        this.loginForm = this.fb.group({
+            identifier: [
+                '',
+                [
+                    Validators.required,
+                    Validators.minLength(5),
+                    Validators.maxLength(50)
+                ]
+            ],
+            password: [
+                '',
+                [
+                    Validators.required,
+                    Validators.minLength(8),
+                    Validators.maxLength(50)
+                ]
+            ]
+        });
+    }
 
-    handleLogin(data: { [key: string]: string }) {
-        const loginData: { identifier: string, password: string } = {
-            identifier: data['identifier'],
-            password: data['password']
+    handleLogin() {
+        if (this.loginForm.invalid) {
+            console.log('Fomulaire invalide', this.loginForm.errors);
+            return;
         }
 
-        this.authService.login(loginData).subscribe({
+        this.authService.login(this.loginForm.value).subscribe({
             next: (response) => {
                 this.errorMessage = null;
+                console.log('Login réussi', response);
             },
             error: (error) => {
                 if (error.status === 401) {

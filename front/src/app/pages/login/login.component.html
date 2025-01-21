@@ -11,6 +11,7 @@
     [inputs]="loginInputs"
     [buttonText]="'Se connecter'"
     [errorMessage]="errorMessage"
-    (submitForm)="handleLogin($event)"
+    [formGroup]="loginForm"
+    (submitForm)="handleLogin()"
 >
 </app-form>
