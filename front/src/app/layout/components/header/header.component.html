@@ -12,13 +12,37 @@
     />
     <div *ngIf="(isAuthenticated$ | async)">
         <div class="text-xl hidden md:block">
-            <button mat-button>Articles</button>
-            <button mat-button>Thèmes</button>
-            <button mat-fab class="header-profile-button">
+            <button 
+                mat-button 
+                [routerLink]="'/post'"
+                routerLinkActive
+                #rlaPost="routerLinkActive"
+                [color]="rlaPost.isActive ? 'primary' : ''"
+            >
+                Articles
+            </button>
+            <button 
+                mat-button 
+                [routerLink]="'/topic'"
+                routerLinkActive
+                #rlaTopic="routerLinkActive"
+                [color]="rlaTopic.isActive ? 'primary' : ''"
+            >
+                Thèmes
+            </button>
+            <button 
+                mat-fab 
+                class="header-profile-button"
+                [routerLink]="'/me'"
+                routerLinkActive
+                #rlaProfile="routerLinkActive"
+                [ngClass]="{'header-profile-button-active' : rlaProfile.isActive}"
+            >
                 <mat-icon
                     aria-hidden="false"
                     aria-label="Profile icon"
                     fontIcon="person_outlined"
+                    [color]="rlaProfile.isActive ? 'primary' : ''"
                 >
                     Profile
                 </mat-icon>
@@ -47,13 +71,14 @@
 >
     <mat-sidenav #sidenav mode="side" position="end" [(opened)]="sidenavOpened">
         <mat-nav-list>
-            <mat-list-item>Articles</mat-list-item>
-            <mat-list-item>Thèmes</mat-list-item>
+            <mat-list-item [routerLink]="'/post'">Articles</mat-list-item>
+            <mat-list-item [routerLink]="'/topic'">Thèmes</mat-list-item>
             <button mat-fab class="header-profile-button">
                 <mat-icon
                     aria-hidden="false"
                     aria-label="Profile icon"
                     fontIcon="person_outlined"
+                    [routerLink]="'/me'"
                 >
                     Profile
                 </mat-icon>

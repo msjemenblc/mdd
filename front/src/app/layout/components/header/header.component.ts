@@ -20,4 +20,8 @@ export class HeaderComponent implements OnInit {
     toggleSidenav() {
         this.sidenavOpened = !this.sidenavOpened;
     }
+
+    onTestClick(): void {
+        console.log('bouton cliqué');
+    }
 }

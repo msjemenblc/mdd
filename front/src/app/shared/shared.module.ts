@@ -5,22 +5,25 @@ import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
+import { ItemCardComponent } from './components/item-card/item-card.component';
 
 @NgModule({
     declarations: [
         FormComponent,
-        BackButtonComponent
+        BackButtonComponent,
+        ItemCardComponent,
     ],
     imports: [
         CommonModule,
         ReactiveFormsModule,
         MatButtonModule,
-        MatIconModule,
+        MatIconModule
     ],
     providers: [],
     exports: [
         FormComponent,
-        BackButtonComponent
+        BackButtonComponent,
+        ItemCardComponent
     ]
 })
 export class SharedModule {}

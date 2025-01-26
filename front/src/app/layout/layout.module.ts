@@ -5,6 +5,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from "@angular/material/list";
 import { MatButtonModule } from "@angular/material/button";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
     declarations: [
@@ -12,6 +13,7 @@ import { MatButtonModule } from "@angular/material/button";
     ],
     imports: [
         CommonModule,
+        RouterModule,
         MatIconModule,
         MatSidenavModule,
         MatListModule,

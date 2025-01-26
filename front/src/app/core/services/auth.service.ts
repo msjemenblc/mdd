@@ -12,7 +12,7 @@ export interface AuthResponse {
     providedIn: 'root'
 })
 export class AuthService {
-    private apiUrl: string = environment.apiUrl + '/auth';
+    private apiUrl: string = `${environment.apiUrl}/auth`;
     private tokenKey: string = 'auth_token';
     private authStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(!!this.getToken());
 

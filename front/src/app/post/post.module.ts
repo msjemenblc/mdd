@@ -4,6 +4,11 @@ import { CommonModule } from "@angular/common";
 import { PostDetailsComponent } from './pages/post-details/post-details.component';
 import { PostCreateComponent } from './pages/post-create/post-create.component';
 import { PostRoutingModule } from "./post-routing.module";
+import { MatButtonModule } from "@angular/material/button";
+import { SharedModule } from "../shared/shared.module";
+import { MatIconModule } from "@angular/material/icon";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatDividerModule } from "@angular/material/divider";
 
 @NgModule({
     declarations: [
@@ -13,7 +18,12 @@ import { PostRoutingModule } from "./post-routing.module";
     ],
     imports: [
         CommonModule,
-        PostRoutingModule
+        PostRoutingModule,
+        SharedModule,
+        MatButtonModule,
+        MatIconModule,
+        MatMenuModule,
+        MatDividerModule
     ],
     providers: [],
     exports: [
