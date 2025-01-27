@@ -1,0 +1,19 @@
+<div class="flex justify-center pt-8 items-center flex-col gap-6">
+    <div *ngIf="topics$ | async as topics; else loading" class="flex justify-center w-11/12">
+        <div *ngIf="topics.length > 0; else noTopics" class="flex flex-wrap md:gap-10 gap-3">
+                <app-item-card 
+                    *ngFor="let topic of topics" 
+                    [topic]="topic"
+                >
+                </app-item-card>
+        </div>
+    </div>
+    
+    <ng-template #noTopics>
+        <p>Aucun thème disponible pour le moment.</p>
+    </ng-template>
+    
+    <ng-template #loading>
+        <p>Chargement des thèmes...</p>
+    </ng-template>
+</div>

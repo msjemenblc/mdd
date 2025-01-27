@@ -60,7 +60,7 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createPost(
+    public ResponseEntity<Map<String, String>> createPost(
             @RequestHeader("Authorization") String token,
             @RequestBody PostRequest postRequest) {
         try {
@@ -77,7 +77,9 @@ public class PostController {
 
             postService.createPost(newPost);
 
-            return ResponseEntity.ok("Post created with success");
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Post created with success");
+            return ResponseEntity.ok(response);
         } catch (UnauthorizedException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         } catch (NotFoundException e) {

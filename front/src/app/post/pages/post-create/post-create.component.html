@@ -1,1 +1,59 @@
-<p>post-create works!</p>
+<app-back-button></app-back-button>
+<div class="flex justify-center items-center flex-col gap-4 md:pt-32">
+    <h1>Créer un nouvel article</h1>
+    <div *ngIf="errorMessage" class="text-red-500">
+        {{ errorMessage }}
+    </div>
+    <form [formGroup]="postForm" class=" w-10/12 md:w-2/12">
+        <div
+            class="flex flex-col"
+        >
+            <div *ngIf="postForm.get('topic')?.invalid && postForm.get('topic')?.touched" class="text-red-500">
+                <span *ngIf="postForm.get('topic')?.errors?.['required']">Ce champ est requis.</span>
+            </div>
+            <select 
+                [formControlName]="'topic_id'"
+                class="form-input primary-input"
+            >
+                <option value="">Sélectionner un thème</option>
+                <option *ngFor="let topic of topics$ | async" [value]="topic.id">
+                    {{ topic.title }}
+                </option>
+            </select>
+        </div>
+        <div
+            class="flex flex-col"
+        >
+            <div *ngIf="postForm.get('title')?.invalid && postForm.get('title')?.touched" class="text-red-500">
+                <span *ngIf="postForm.get('title')?.errors?.['required']">Ce champ est requis.</span>
+            </div>
+            <input
+                [type]="'text'"
+                [formControlName]="'title'"
+                placeholder="Titre de l'article"
+                class="form-input primary-input"
+            />
+        </div>
+        <div
+            class="flex flex-col"
+        >
+            <div *ngIf="postForm.get('content')?.invalid && postForm.get('content')?.touched" class="text-red-500">
+                <span *ngIf="postForm.get('content')?.errors?.['required']">Ce champ est requis.</span>
+            </div>
+            <textarea 
+                [formControlName]="'description'"
+                rows="10"
+                class="form-input primary-input resize-none"
+                placeholder="Contenu de l'article"
+            ></textarea>
+        </div>
+    </form>
+    <button 
+        mat-raised-button 
+        color="primary"
+        [disabled]="postForm.invalid"
+        (click)="handleCreatePost()"
+    >
+        Créer
+    </button>
+</div>

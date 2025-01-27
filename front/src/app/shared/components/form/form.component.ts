@@ -12,6 +12,7 @@ export class FormComponent {
     @Input() buttonText: string = 'Valider';
     @Input() errorMessage: string | null = null;
     @Input() formGroup!: FormGroup;
+    @Input() primary?: boolean = false;
     @Output() submitForm = new EventEmitter<void>();
 
     formData: { [key: string]: string } = {};

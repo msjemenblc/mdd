@@ -30,7 +30,7 @@
         </mat-menu>
     </div>
     <div *ngIf="posts$ | async as posts; else loading" class="flex justify-center w-11/12">
-        <div *ngIf="posts.length > 0; else noPosts" class="flex flex-wrap md:gap-10 gap-3">
+        <div *ngIf="posts.length > 0; else noPosts" class="flex md:flex-row md:flex-wrap flex-col items-stretch md:gap-10 gap-3">
                 <app-item-card 
                     *ngFor="let post of posts" 
                     [post]="post"
@@ -41,10 +41,10 @@
     </div>
     
     <ng-template #noPosts>
-        <p>Aucun post disponible pour le moment.</p>
+        <p>Aucun article disponible pour le moment.</p>
     </ng-template>
     
     <ng-template #loading>
-        <p>Chargement des posts...</p>
+        <p>Chargement des articles...</p>
     </ng-template>
 </div>

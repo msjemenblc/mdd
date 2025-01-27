@@ -9,6 +9,7 @@ import { SharedModule } from "../shared/shared.module";
 import { MatIconModule } from "@angular/material/icon";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatDividerModule } from "@angular/material/divider";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -20,6 +21,8 @@ import { MatDividerModule } from "@angular/material/divider";
         CommonModule,
         PostRoutingModule,
         SharedModule,
+        ReactiveFormsModule,
+        FormsModule,
         MatButtonModule,
         MatIconModule,
         MatMenuModule,

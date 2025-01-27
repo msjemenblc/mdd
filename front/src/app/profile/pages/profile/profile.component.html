@@ -1,0 +1,22 @@
+<div *ngIf="user$ | async as user; else loading" class="flex flex-col justify-center gap-4">
+    <app-form
+        [title]="'Profil utilisateur'"
+        [inputs]="profileInputs"
+        [buttonText]="'Sauvegarder'"
+        [errorMessage]="errorMessage"
+        [formGroup]="profileForm"
+        [primary]="true"
+        (submitForm)="handleEditProfile()"
+    >
+    </app-form>
+    <button 
+        mat-button
+        class="text-sm text-red-600"
+        (click)="onLogoutClick()"
+    >
+        Se déconnecter
+    </button>
+</div>
+<ng-template #loading>
+    <p>Chargement en cours...</p>
+</ng-template>

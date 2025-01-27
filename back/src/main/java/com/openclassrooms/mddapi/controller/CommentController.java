@@ -1,5 +1,8 @@
 package com.openclassrooms.mddapi.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +36,7 @@ public class CommentController {
     private PostService postService;
 
     @PostMapping
-    public ResponseEntity<String> createComment(
+    public ResponseEntity<Map<String, String>> createComment(
             @RequestHeader("Authorization") String token,
             @RequestBody CommentRequest commentRequest) {
         try {
@@ -49,7 +52,9 @@ public class CommentController {
 
             commentService.createComment(newComment);
 
-            return ResponseEntity.ok("Comment created with success");
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Comment created with success");
+            return ResponseEntity.ok(response);
         } catch (UnauthorizedException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         } catch (NotFoundException e) {

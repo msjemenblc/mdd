@@ -38,14 +38,16 @@ public class UserController {
     }
 
     @PostMapping("/subscribe/{id}")
-    public ResponseEntity<String> subscribe(
+    public ResponseEntity<Map<String, String>> subscribe(
             @RequestHeader("Authorization") String token, 
             @PathVariable("id") String topicId) {
         try {
             User user = userService.getCurrentUserWithToken(token);
             userService.subscribe(user.getId(), Long.parseLong(topicId));
             
-            return ResponseEntity.ok("User subscribed successfully");
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "User subscribed successfully");
+            return ResponseEntity.ok(response);
         } catch (UnauthorizedException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         } catch (NotFoundException e) {
@@ -56,14 +58,15 @@ public class UserController {
     }
 
     @DeleteMapping("/subscribe/{id}")
-    public ResponseEntity<String> unsubscribe(
-        @RequestHeader("Authorization") String token, 
+    public ResponseEntity<Map<String, String>> unsubscribe(
+        @RequestHeader("Authorization") String token,
         @PathVariable("id") String topicId) {
         try {
             User user = userService.getCurrentUserWithToken(token);
             userService.unsubscribe(user.getId(), Long.parseLong(topicId));
-
-            return ResponseEntity.ok("User unsubscribed successfully");
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "User unsubscribed successfully");
+            return ResponseEntity.ok(response);
         } catch (UnauthorizedException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         } catch (NotFoundException e) {
