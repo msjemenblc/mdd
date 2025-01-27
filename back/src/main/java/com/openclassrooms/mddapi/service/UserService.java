@@ -7,12 +7,16 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.mddapi.dto.request.RegisterRequest;
 import com.openclassrooms.mddapi.dto.response.TopicDTO;
 import com.openclassrooms.mddapi.dto.response.UserDTO;
 import com.openclassrooms.mddapi.exception.AlreadyExistsException;
+import com.openclassrooms.mddapi.exception.NotFoundException;
+import com.openclassrooms.mddapi.exception.UnauthorizedException;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.UserRepository;
@@ -29,6 +33,9 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private JwtDecoder jwtDecoder;
+
     public Optional<User> getUser(Long id) {
         return userRepository.findById(id);
     }
@@ -41,6 +48,20 @@ public class UserService {
         }
 
         return user;
+    }
+
+    public User getCurrentUserWithToken(String token) {
+        if (token == null || !token.startsWith("Bearer")) {
+            throw new UnauthorizedException("Token invalide");
+        }
+
+        String jwtToken = token.substring(7);
+
+        Jwt decodedJwt = jwtDecoder.decode(jwtToken);
+        String emailOrUsername = decodedJwt.getSubject();
+
+        return getUserWithEmailOrUsername(emailOrUsername)
+            .orElseThrow(() -> new NotFoundException("Utilisateur introuvable !"));
     }
 
     public UserDTO registerUser(RegisterRequest registerRequest) {
@@ -64,6 +85,10 @@ public class UserService {
         User savedUser = userRepository.save(user);
 
         return convertToDTO(savedUser);
+    }
+
+    public User save(User user) {
+        return userRepository.save(user);
     }
 
     public void subscribe(Long id, Long topicId) {
