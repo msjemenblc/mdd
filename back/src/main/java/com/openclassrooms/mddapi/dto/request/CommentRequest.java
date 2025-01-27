@@ -15,8 +15,4 @@ public class CommentRequest {
     @JsonProperty("post_id")
     private Long postId;
 
-    @NotBlank
-    @JsonProperty("author_id")
-    private Long authorId;
-
 }

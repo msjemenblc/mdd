@@ -6,16 +6,20 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.mddapi.dto.request.PostRequest;
 import com.openclassrooms.mddapi.dto.response.PostDTO;
+import com.openclassrooms.mddapi.exception.NotFoundException;
+import com.openclassrooms.mddapi.exception.UnauthorizedException;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
@@ -56,27 +60,29 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createPost(@RequestBody PostRequest postRequest) {
-        if (postRequest.getAuthorId() == null || postRequest.getTopicId() == null) {
-            throw new IllegalArgumentException("User ID or Topic ID must not be null");
+    public ResponseEntity<String> createPost(
+            @RequestHeader("Authorization") String token,
+            @RequestBody PostRequest postRequest) {
+        try {
+            User author = userService.getCurrentUserWithToken(token);
+
+            Topic topic = topicService.getTopicEntity(postRequest.getTopicId())
+                .orElseThrow(() -> new RuntimeException("Topic not found with id: " + postRequest.getTopicId()));
+        
+            Post newPost = new Post();
+            newPost.setTitle(postRequest.getTitle());
+            newPost.setDescription(postRequest.getDescription());
+            newPost.setAuthor(author);
+            newPost.setTopic(topic);
+
+            postService.createPost(newPost);
+
+            return ResponseEntity.ok("Post created with success");
+        } catch (UnauthorizedException e) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        } catch (NotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
-        User author = userService.getUser(postRequest.getAuthorId())
-            .orElseThrow(() -> new RuntimeException("User not found with id: " + postRequest.getAuthorId()));
-
-        Topic topic = topicService.getTopicEntity(postRequest.getTopicId())
-            .orElseThrow(() -> new RuntimeException("Topic not found with id: " + postRequest.getTopicId()));
-
-        Post newPost = new Post();
-        newPost.setTitle(postRequest.getTitle());
-        newPost.setDescription(postRequest.getDescription());
-        newPost.setAuthor(author);
-        newPost.setTopic(topic);
-
-        postService.createPost(newPost);
-
-        String response = "Post created with success";
-        return ResponseEntity.ok(response);
     }
 
 }

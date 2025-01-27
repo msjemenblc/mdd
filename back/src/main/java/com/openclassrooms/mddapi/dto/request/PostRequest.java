@@ -18,8 +18,4 @@ public class PostRequest {
     @JsonProperty("topic_id")
     private Long topicId;
 
-    @NotBlank
-    @JsonProperty("author_id")
-    private Long authorId;
-
 }
