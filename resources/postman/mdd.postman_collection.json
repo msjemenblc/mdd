@@ -51,7 +51,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"mathis\",\r\n    \"email\": \"mathis@example.com\",\r\n    \"password\": \"passw&or@dABc12\"\r\n}",
+							"raw": "{\r\n    \"username\": \"shana\",\r\n    \"email\": \"shana@example.com\",\r\n    \"password\": \"passw&or@dABc12\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -86,7 +86,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibWF0aGlzQGV4YW1wbGUuY29tIiwiZXhwIjoxNzM3MjEyMTU5LCJpYXQiOjE3MzcxMjU3NTl9.sg55GRySiiCgxjLTYXluYDViDoeXEZc0OGiTIc-TMPo",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibWF0aGlzQGV4YW1wbGUuY29tIiwiZXhwIjoxNzM4MDkyODU4LCJpYXQiOjE3MzgwMDY0NTh9.Vy30PKBrFygAfBf6t7u5DROqx3sfntu6R7jrQFDbOLA",
 									"type": "string"
 								}
 							]
@@ -94,7 +94,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:3001/api/user/1/subscribe/1",
+							"raw": "localhost:3001/api/user/subscribe/2",
 							"host": [
 								"localhost"
 							],
@@ -102,9 +102,8 @@
 							"path": [
 								"api",
 								"user",
-								"1",
 								"subscribe",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -118,7 +117,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibWF0aGlzQGV4YW1wbGUuY29tIiwiZXhwIjoxNzM3MjEyMTU5LCJpYXQiOjE3MzcxMjU3NTl9.sg55GRySiiCgxjLTYXluYDViDoeXEZc0OGiTIc-TMPo",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibWF0aGlzQGV4YW1wbGUuY29tIiwiZXhwIjoxNzM4MDU0MDMwLCJpYXQiOjE3Mzc5Njc2MzB9.6hPRNEXIUJOotLK1DUvzmP_HC5EYdw1rHGomzmT2TXw",
 									"type": "string"
 								}
 							]
@@ -126,7 +125,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3001/api/user/1/subscribe/1",
+							"raw": "localhost:3001/api/user/subscribe/2",
 							"host": [
 								"localhost"
 							],
@@ -134,9 +133,8 @@
 							"path": [
 								"api",
 								"user",
-								"1",
 								"subscribe",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -150,13 +148,52 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibWF0aGlzQGV4YW1wbGUuY29tIiwiZXhwIjoxNzM3MjEyMTU5LCJpYXQiOjE3MzcxMjU3NTl9.sg55GRySiiCgxjLTYXluYDViDoeXEZc0OGiTIc-TMPo",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibWF0aGlzQGV4YW1wbGUuY29tIiwiZXhwIjoxNzM4MDU0MDMwLCJpYXQiOjE3Mzc5Njc2MzB9.6hPRNEXIUJOotLK1DUvzmP_HC5EYdw1rHGomzmT2TXw",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"url": {
+							"raw": "localhost:3001/api/user/me",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"user",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibWF0aGlzQGV4YW1wbGUuY29tIiwiZXhwIjoxNzM4MDcyODQzLCJpYXQiOjE3Mzc5ODY0NDN9.2QstRyB3hBmNPfakx7jJGa_zI0DIrhLyxnBDz7TS4JA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"mathis\",\r\n    \"email\": \"mathis@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:3001/api/user/me",
 							"host": [
@@ -185,7 +222,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibWF0aGlzQGV4YW1wbGUuY29tIiwiZXhwIjoxNzM3MTI1NTQzLCJpYXQiOjE3MzcwMzkxNDN9.IxQYmQSWYBtsxaXXIFnuZ_KkpR1m9Q5Or-x8z_JYpu0",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibWF0aGlzQGV4YW1wbGUuY29tIiwiZXhwIjoxNzM4MDU0MDMwLCJpYXQiOjE3Mzc5Njc2MzB9.6hPRNEXIUJOotLK1DUvzmP_HC5EYdw1rHGomzmT2TXw",
 									"type": "string"
 								}
 							]
@@ -214,7 +251,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibWF0aGlzQGV4YW1wbGUuY29tIiwiZXhwIjoxNzM3MjEyMTU5LCJpYXQiOjE3MzcxMjU3NTl9.sg55GRySiiCgxjLTYXluYDViDoeXEZc0OGiTIc-TMPo",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibWF0aGlzQGV4YW1wbGUuY29tIiwiZXhwIjoxNzM4MDU0MDMwLCJpYXQiOjE3Mzc5Njc2MzB9.6hPRNEXIUJOotLK1DUvzmP_HC5EYdw1rHGomzmT2TXw",
 									"type": "string"
 								}
 							]
@@ -222,7 +259,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3001/api/post/1",
+							"raw": "localhost:3001/api/post/6",
 							"host": [
 								"localhost"
 							],
@@ -230,7 +267,7 @@
 							"path": [
 								"api",
 								"post",
-								"1"
+								"6"
 							]
 						}
 					},
@@ -244,7 +281,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibWF0aGlzQGV4YW1wbGUuY29tIiwiZXhwIjoxNzM2OTYzNDIzLCJpYXQiOjE3MzY4NzcwMjN9.7J6jA40mQGB1cechzThYBsffUNSB5SrA7PSxR88VPVs",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibWF0aGlzQGV4YW1wbGUuY29tIiwiZXhwIjoxNzM4MDU0MDMwLCJpYXQiOjE3Mzc5Njc2MzB9.6hPRNEXIUJOotLK1DUvzmP_HC5EYdw1rHGomzmT2TXw",
 									"type": "string"
 								}
 							]
@@ -253,7 +290,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Authentification à double facteur\",\r\n    \"description\": \"Rajoutez une couche à la vérification de votre identité !\",\r\n    \"topic_id\": 3,\r\n    \"author_id\": 1\r\n}\r\n",
+							"raw": "{\r\n    \"title\": \"Article TOKEN\",\r\n    \"description\": \"Cet article a été créé à en récupérant le token de l'utilisateur, ce qui garantie alors une meilleure sécurité\",\r\n    \"topic_id\": 3\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -287,7 +324,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibWF0aGlzQGV4YW1wbGUuY29tIiwiZXhwIjoxNzM3MjEyMTU5LCJpYXQiOjE3MzcxMjU3NTl9.sg55GRySiiCgxjLTYXluYDViDoeXEZc0OGiTIc-TMPo",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibWF0aGlzQGV4YW1wbGUuY29tIiwiZXhwIjoxNzM4MDU0MDMwLCJpYXQiOjE3Mzc5Njc2MzB9.6hPRNEXIUJOotLK1DUvzmP_HC5EYdw1rHGomzmT2TXw",
 									"type": "string"
 								}
 							]
@@ -351,7 +388,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibWF0aGlzQGV4YW1wbGUuY29tIiwiZXhwIjoxNzM3MTI1NTQzLCJpYXQiOjE3MzcwMzkxNDN9.IxQYmQSWYBtsxaXXIFnuZ_KkpR1m9Q5Or-x8z_JYpu0",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibWF0aGlzQGV4YW1wbGUuY29tIiwiZXhwIjoxNzM4MDU0MDMwLCJpYXQiOjE3Mzc5Njc2MzB9.6hPRNEXIUJOotLK1DUvzmP_HC5EYdw1rHGomzmT2TXw",
 									"type": "string"
 								}
 							]
@@ -360,7 +397,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"content\": \"Merci beaucoup pour l'article\",\r\n    \"post_id\": 1,\r\n    \"author_id\": 1\r\n}\r\n",
+							"raw": "{\r\n    \"content\": \"Ce commentaire a été posté grâce à la vérification par token !\",\r\n    \"post_id\": 6\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
