@@ -1,5 +1,5 @@
 <header 
-    class="w-screen border-b-2 border-b-black flex-row justify-between items-center px-2 md:px-6"
+    class="border-b-2 border-b-black flex-row justify-between items-center px-2 md:px-6"
     [ngClass]="{ 
         'hidden md:flex': !(isAuthenticated$ | async),
         'flex': isAuthenticated$ | async
@@ -71,14 +71,15 @@
 >
     <mat-sidenav #sidenav mode="side" position="end" [(opened)]="sidenavOpened">
         <mat-nav-list>
-            <mat-list-item [routerLink]="'/post'">Articles</mat-list-item>
-            <mat-list-item [routerLink]="'/topic'">Thèmes</mat-list-item>
+            <mat-list-item [routerLink]="'/post'" (click)="toggleSidenav()">Articles</mat-list-item>
+            <mat-list-item [routerLink]="'/topic'" (click)="toggleSidenav()">Thèmes</mat-list-item>
             <button mat-fab class="header-profile-button">
                 <mat-icon
                     aria-hidden="false"
                     aria-label="Profile icon"
                     fontIcon="person_outlined"
-                    [routerLink]="'/me'"
+                    [routerLink]="'/profile'"
+                    (click)="toggleSidenav()"
                 >
                     Profile
                 </mat-icon>

@@ -26,9 +26,14 @@
 
     <button
         mat-raised-button
-        color="primary"
         *ngIf="topic"
+        class="bg-[#673ab7]"
+        [ngClass]="{
+            'bg-red-400': isSubscribed,
+            'bg-[#673ab7]': !isSubscribed
+        }"
+        (click)="onToggle()"
     >
-        S'abonner
+        {{ isSubscribed ? 'Se désabonner' : 'S\'abonner' }}
     </button>
 </div>

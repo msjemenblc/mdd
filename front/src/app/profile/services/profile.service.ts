@@ -47,4 +47,41 @@ export class ProfileService {
             map((response) => response.token)
         );
     }
+
+    /**
+     * Récupère les IDs des topics auxquels l'utilisateur est abonné.
+     * @returns Observable<number[]>
+     */
+    getSubscriptionsIds(): Observable<number[]> {
+        return this.http.get<User>(`${this.apiUrl}/me`).pipe(
+            map((user) => user.subscriptions.map(subscription => subscription.id))
+        );
+    }
+
+
+    /**
+     * Abonne l'utilisateur à un topic.
+     * @param topicId L'identifiant du topic à auquel s'abonner.
+     * @returns Observable<string>
+     */
+    subscribe(topicId: number): Observable<string> {
+        return this.http.post<{ message: string }>(`${this.apiUrl}/subscribe/${topicId}`, {}).pipe(
+            map(response => {
+                return response.message;
+            })
+        );
+    }
+
+    /**
+     * Se désabonne d'un topic.
+     * @param topicId L'identifiant du topic à auquel se désabonner.
+     * @returns Observable<string>
+     */
+    unsubscribe(topicId: number): Observable<string> {
+        return this.http.delete<{ message: string }>(`${this.apiUrl}/subscribe/${topicId}`).pipe(
+            map(response => {
+                return response.message;
+            })
+        );
+    }
 }
