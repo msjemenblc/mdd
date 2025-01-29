@@ -1,0 +1,39 @@
+<div 
+    class="flex flex-col gap-1 bg-gray-300 p-4 md:w-[400px] md:h-[220px] h-[155px] rounded-lg"
+    [ngClass]="{
+        'justify-between md:h-[185px]': !!topic
+    }"
+>
+    <p class="font-bold md:text-base text-sm">
+        {{ post?.title }}
+        {{ topic?.title }}
+    </p>
+
+    <div *ngIf="post" class=" flex items-center justify-between md:text-base text-sm md:leading-normal leading-[0.5rem] text-gray-600 pr-36">
+        <p>{{ post.createdAt | date: 'dd/MM/yyyy' }}</p>
+        <p>{{ post.author.username }}</p>
+    </div>
+
+    <p 
+        class="md:text-sm text-xs text-gray-800 overflow-hidden text-ellipsis md:line-clamp-5 line-clamp-4"
+        [ngClass]="{
+            'md:line-clamp-3': !!topic
+        }"
+    >
+        {{ post?.description }}
+        {{ topic?.description }}
+    </p>
+
+    <button
+        mat-raised-button
+        *ngIf="topic"
+        class="bg-[#673ab7]"
+        [ngClass]="{
+            'bg-red-400': isSubscribed,
+            'bg-[#673ab7]': !isSubscribed
+        }"
+        (click)="onToggle()"
+    >
+        {{ isSubscribed ? 'Se désabonner' : 'S\'abonner' }}
+    </button>
+</div>

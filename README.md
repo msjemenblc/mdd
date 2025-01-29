@@ -1,25 +1,34 @@
-# P6-Full-Stack-reseau-dev
+# mdd
 
-## Front
+## Description
+Ce projet est une application utilisant **Angular** pour son frontend et **Spring** pour le backend. Les utilisateurs peuvent consulter, créer et commenter des articles, modifier les informations concernant leur profil, et aussi gérer leurs abonnements à des thèmes.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+## Prérequis
+- Java 22.0.2
+- Maven 3.9.9
+- Node.js 18.20.4
+- npm 10.7.0
+- Angular CLI 14.1.3
 
-Don't forget to install your node_modules before starting (`npm install`).
+## Installation
+### Cloner le dépôt
+```
+git clone https://github.com/msjemenblc/mdd.git
+cd mdd
+```
 
-### Development server
+### Configurer la base de données
+Générez une nouvelle base de données, puis ajoutez le script présent dans le projet ```resources/sql/script.sql``` pour la création des tables.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Installer les dépendances
+- Installez celles du frontend avec ```npm install```
+- Pour le backend, uilisez la commande ```mvn clean install```
 
-### Build
+### Lancer le projet
+- Pour lancer le frontend : ```ng serve```
+- Pour le backend : ```mvn spring-boot:run```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Naviguer sur l'application
+On utilisera le port 4200 pour le frontend, et 3001 pour le backend
 
-### Where to start
-
-As you may have seen if you already started the app, a simple home page containing a logo, a title and a button is available. If you take a look at its code (in the `home.component.html`) you will see that an external UI library is already configured in the project.
-
-This library is `@angular/material`, it's one of the most famous in the angular ecosystem. As you can see on their docs (https://material.angular.io/), it contains a lot of highly customizable components that will help you design your interfaces quickly.
-
-Note: I recommend to use material however it's not mandatory, if you prefer you can get ride of it.
-
-Good luck!
+Créez un identifiant à partir de la page register pour ensuite naviguer librement sur toute l'application

@@ -1,0 +1,36 @@
+<div class="flex items-center flex-col pt-10">
+    <div *ngIf="user$ | async as user; else loading" class="flex flex-col items-center gap-7">
+        <app-form
+            [title]="'Profil utilisateur'"
+            [inputs]="profileInputs"
+            [buttonText]="'Sauvegarder'"
+            [errorMessage]="errorMessage"
+            [formGroup]="profileForm"
+            [primary]="true"
+            (submitForm)="handleEditProfile()"
+        >
+        </app-form>
+        <button 
+            mat-button
+            class="text-sm text-red-600 md:w-3/12 w-1/2"
+            (click)="onLogoutClick()"
+        >
+            Se déconnecter
+        </button>
+
+        <mat-divider class="bg-black w-3/4"></mat-divider>
+        
+        <h1>Abonnements</h1>
+
+        <div class="w-screen">
+            <app-topic
+                [includeAll]="false"
+            >
+            </app-topic>
+        </div>
+
+    </div>
+    <ng-template #loading>
+        <p>Chargement en cours...</p>
+    </ng-template>
+</div>

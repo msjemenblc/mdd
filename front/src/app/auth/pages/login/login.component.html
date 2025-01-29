@@ -1,0 +1,17 @@
+<app-back-button></app-back-button>
+<div class="flex justify-center md:pt-32">
+    <img
+        src="/assets/logo_p6.png" 
+        alt="logo"
+        class="w-3/4 md:hidden"
+    />
+</div>
+<app-form
+    [title]="'Se connecter'"
+    [inputs]="loginInputs"
+    [buttonText]="'Se connecter'"
+    [errorMessage]="errorMessage"
+    [formGroup]="loginForm"
+    (submitForm)="handleLogin()"
+>
+</app-form>

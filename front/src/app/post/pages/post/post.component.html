@@ -1,0 +1,50 @@
+<div class="flex justify-center pt-8 items-center flex-col gap-6">
+    <div class="flex md:flex-row flex-col items-center gap-4 justify-between md:w-11/12">
+        <button
+            mat-raised-button
+            color="primary"
+            [routerLink]="'/post/create'"
+        >
+            Créer un article
+        </button>
+        <button 
+            mat-button
+            class="flex justify-center items-center gap-2"
+            [matMenuTriggerFor]="sortingMenu"
+        >
+            Trier par
+            <mat-icon
+                aria-hidden="false"
+                aria-label="Arrow downward icon"
+                fontIcon="arrow_downward"
+            >
+                Sorting arrow
+            </mat-icon>
+        </button>
+        <mat-menu #sortingMenu="matMenu">
+            <button mat-menu-item (click)="setSortBy('a-z')">A-Z</button>
+            <button mat-menu-item (click)="setSortBy('z-a')">Z-A</button>
+            <button mat-menu-item (click)="setSortBy('recent')">Plus récents</button>
+            <button mat-menu-item (click)="setSortBy('oldest')">Plus anciens</button>
+            <button mat-menu-item (click)="setSortBy('author')">Par auteurs</button>
+        </mat-menu>
+    </div>
+    <div *ngIf="posts$ | async as posts; else loading" class="flex justify-center w-11/12">
+        <div *ngIf="posts.length > 0; else noPosts" class="flex md:flex-row md:flex-wrap flex-col items-stretch md:gap-10 gap-3">
+                <app-item-card 
+                    *ngFor="let post of posts" 
+                    [post]="post"
+                    [routerLink]="['/post', post.id]"
+                >
+                </app-item-card>
+        </div>
+    </div>
+    
+    <ng-template #noPosts>
+        <p>Aucun article disponible pour le moment.</p>
+    </ng-template>
+    
+    <ng-template #loading>
+        <p>Chargement des articles...</p>
+    </ng-template>
+</div>

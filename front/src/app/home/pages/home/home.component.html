@@ -1,0 +1,23 @@
+<div class="flex justify-center items-center flex-col gap-16 md:pt-32">
+    <img 
+        src="/assets/logo_p6.png" 
+        alt="logo"
+        class="w-3/4 md:w-[400px]"
+    />
+    <div class="flex flex-col md:flex-row gap-4 md:gap-10">
+        <button 
+            mat-raised-button
+            class="home-button text-lg"
+            [routerLink]="'/auth/login'"
+        >
+            Se connecter
+        </button>
+        <button 
+            mat-raised-button
+            class="home-button text-lg"
+            [routerLink]="'/auth/register'"
+        >
+            S'inscrire
+        </button>
+    </div>
+</div>

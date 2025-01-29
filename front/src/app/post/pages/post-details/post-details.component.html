@@ -1,0 +1,68 @@
+<app-back-button></app-back-button>
+<div class="flex justify-center items-center flex-col gap-4">
+    <div *ngIf="post$ | async as post; else loading" class="w-screen md:w-6/12 flex flex-col gap-3 p-4 md:mt-0 mt-2">
+        <p class="text-xl md:text-2xl font-bold text-center">{{ post.title }}</p>
+
+        <div class="flex items-center justify-between flex-wrap w-[100%] md:w-1/2 text-base">
+            <p class="md:w-auto w-1/2">{{ post.createdAt | date: 'dd/MM/yyyy' }}</p>
+            <p class="md:w-auto w-1/2">{{ post.author.username }}</p>
+            <p>{{ post.topic.title }}</p>
+        </div>
+
+        <p class="text-base">
+            {{ post.description }}
+        </p>
+
+        <mat-divider class="bg-black"></mat-divider>
+
+        <p class="text-base">Commentaires</p>
+
+        <div *ngIf="post.comments.length > 0; else noComments" class="flex items-center flex-col gap-3">
+            <div *ngFor="let comment of post.comments" class="flex md:flex-row flex-col-reverse w-[100%] md:w-[80%]">
+                <p class="md:w-[20%] w-[100%] md:text-start text-end">{{ comment.author.username }}</p>
+                <p class="w-[100%] md:w-[80%] bg-gray-300 p-4 min-h-16 rounded-lg">{{ comment.content }}</p>
+            </div>
+        </div>
+
+        <ng-template #noComments>
+            <p>Aucun commentaire.</p>
+        </ng-template>
+
+        <div *ngIf="errorMessage" class="text-red-500">
+            {{ errorMessage }}
+        </div>
+
+        <div class="mt-2 flex md:flex-row flex-col items-end md:items-center">
+            <textarea
+                [(ngModel)]="commentContent"
+                rows="4"
+                class="w-full md:w-[80%] md:ml-[10%] resize-none post-comment-textarea"
+                placeholder="Ecrivez ici votre commentaire"
+            ></textarea>
+            <button
+                mat-icon-button
+                class="w-[10%] md:mb-0 transform translate-y-[-75px] md:translate-y-0"
+                (click)="handleCreateComment()"
+            >
+                <mat-icon
+                    aria-hidden="false"
+                    aria-label="Send icon"
+                    fontIcon="send"
+                    color="primary"
+                    class="text-[25px] rotate-[-35deg]"
+                >
+                    Send
+                </mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <ng-template #noPosts>
+        <p>Aucun post disponible pour le moment.</p>
+    </ng-template>
+    
+    <ng-template #loading>
+        <p>Chargement des posts...</p>
+    </ng-template>
+</div>
+
